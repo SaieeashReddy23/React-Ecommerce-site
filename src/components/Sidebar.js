@@ -1,16 +1,53 @@
-import React from 'react'
-import logo from '../assets/logo.svg'
-import { Link } from 'react-router-dom'
-import { useProductsContext } from '../context/products_context'
-import { FaTimes } from 'react-icons/fa'
-import { links } from '../utils/constants'
-import styled from 'styled-components'
-import CartButtons from './CartButtons'
-import { useUserContext } from '../context/user_context'
+import React from "react";
+import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
+import { useProductsContext } from "../context/products_context";
+import { FaTimes } from "react-icons/fa";
+import { links } from "../utils/constants";
+import styled from "styled-components";
+import CartButtons from "./CartButtons";
+import { useUserContext } from "../context/user_context";
 
 const Sidebar = () => {
-  return <h4>sidebar</h4>
-}
+  const { sidebar, closeSidebar } = useProductsContext();
+
+  return (
+    <SidebarContainer>
+      <div className={sidebar ? "sidebar show-sidebar" : "sidebar"}>
+        <div className="sidebar-header">
+          <img src={logo} alt="logo" />
+          <button className="close-btn" onClick={closeSidebar}>
+            <FaTimes />
+          </button>
+        </div>
+        <ul className="links">
+          <li>
+            <a>
+              <Link to="/"> Home</Link>
+            </a>
+          </li>
+          <li>
+            <a>
+              <Link to="/about">About</Link>
+            </a>
+          </li>
+          <li>
+            <a>
+              <Link to="/products"> Products</Link>
+            </a>
+          </li>
+          <li>
+            <a>
+              <Link to="/checkout">Checkout</Link>
+            </a>
+          </li>
+        </ul>
+
+        <CartButtons className="cart-btn-wrapper" />
+      </div>
+    </SidebarContainer>
+  );
+};
 
 const SidebarContainer = styled.div`
   text-align: center;
@@ -81,6 +118,6 @@ const SidebarContainer = styled.div`
       display: none;
     }
   }
-`
+`;
 
-export default Sidebar
+export default Sidebar;

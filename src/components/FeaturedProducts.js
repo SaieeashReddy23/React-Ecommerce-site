@@ -1,17 +1,27 @@
-import React from 'react'
-import { useProductsContext } from '../context/products_context'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import Error from './Error'
-import Loading from './Loading'
-import Product from './Product'
+import React from "react";
+import { useProductsContext } from "../context/products_context";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Error from "./Error";
+import Loading from "./Loading";
+import Product from "./Product";
 
 const FeaturedProducts = () => {
-  return <h4>featured products</h4>
-}
+  return (
+    <Wrapper>
+      <h1>Featured Products</h1>
+      <div className="featured"></div>
+      <Link to="/products">
+        <button className="btn">All Products</button>
+      </Link>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   background: var(--clr-grey-10);
+  padding: 2rem;
+  text-align: center;
   .featured {
     margin: 4rem auto;
     display: grid;
@@ -31,6 +41,6 @@ const Wrapper = styled.section`
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }
   }
-`
+`;
 
-export default FeaturedProducts
+export default FeaturedProducts;

@@ -1,9 +1,19 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 const ErrorPage = () => {
-  return <h4>error page</h4>
-}
+  return (
+    <Wrapper>
+      <div>
+        <h1>404</h1>
+        <h4>Sorry , The page you tried connot be found</h4>
+        <button className="btn">
+          <Link to="/">Back Home</Link>
+        </button>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.main`
   background: var(--clr-primary-10);
@@ -11,13 +21,14 @@ const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 80vh;
   h1 {
-    font-size: 10rem;
+    font-size: 5rem;
   }
-  h3 {
+  h4 {
     text-transform: none;
     margin-bottom: 2rem;
   }
-`
+`;
 
-export default ErrorPage
+export default ErrorPage;

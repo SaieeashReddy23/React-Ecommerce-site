@@ -1,22 +1,62 @@
-import React from 'react'
-import styled from 'styled-components'
-import logo from '../assets/logo.svg'
-import { FaBars } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { links } from '../utils/constants'
-import CartButtons from './CartButtons'
-import { useProductsContext } from '../context/products_context'
-import { useUserContext } from '../context/user_context'
+import React from "react";
+import styled from "styled-components";
+import logo from "../assets/logo.svg";
+import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { links } from "../utils/constants";
+import CartButtons from "./CartButtons";
+import { useProductsContext } from "../context/products_context";
+import { useUserContext } from "../context/user_context";
 
 const Nav = () => {
-  return <h4>navbar</h4>
-}
+  const { openSidebar } = useProductsContext();
+
+  return (
+    <NavContainer>
+      <div className="nav-center">
+        <div className="nav-header">
+          <img src={logo} alt="logo" />
+          <button className="nav-toggle" onClick={openSidebar}>
+            <FaBars />
+          </button>
+        </div>
+        <ul className="nav-links">
+          <li>
+            <Link to="/">
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <a>
+              <Link to="/about">About</Link>
+            </a>
+          </li>
+          <li>
+            <a>
+              <Link to="/products"> Products</Link>
+            </a>
+          </li>
+          <li>
+            <a>
+              <Link to="/checkout">Checkout</Link>
+            </a>
+          </li>
+        </ul>
+
+        <div className="cart-btn-wrapper">
+          <CartButtons />
+        </div>
+      </div>
+    </NavContainer>
+  );
+};
 
 const NavContainer = styled.nav`
-  height: 5rem;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 
   .nav-center {
     width: 90vw;
@@ -60,6 +100,7 @@ const NavContainer = styled.nav`
       display: flex;
       justify-content: center;
       li {
+        float: left;
         margin: 0 0.5rem;
       }
       a {
@@ -77,6 +118,6 @@ const NavContainer = styled.nav`
       display: grid;
     }
   }
-`
+`;
 
-export default Nav
+export default Nav;

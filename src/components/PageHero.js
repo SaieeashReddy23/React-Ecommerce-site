@@ -1,14 +1,23 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-const PageHero = () => {
-  return <h4>page hero</h4>
-}
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+const PageHero = ({ title }) => {
+  return (
+    <Wrapper>
+      <a className="section-center">
+        <h4>
+          <Link to="/"> Home / </Link>
+          <b>{title}</b>
+        </h4>
+      </a>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   background: var(--clr-primary-10);
   width: 100%;
-  min-height: 20vh;
+  min-height: 15vh;
   display: flex;
   align-items: center;
 
@@ -21,6 +30,6 @@ const Wrapper = styled.section`
   a:hover {
     color: var(--clr-primary-1);
   }
-`
+`;
 
-export default PageHero
+export default PageHero;

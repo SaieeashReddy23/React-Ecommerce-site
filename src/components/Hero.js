@@ -1,12 +1,28 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import heroBcg from '../assets/hero-bcg.jpeg'
-import heroBcg2 from '../assets/hero-bcg-2.jpeg'
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import heroBcg from "../assets/hero-bcg.jpeg";
+import heroBcg2 from "../assets/hero-bcg-2.jpeg";
 
 const Hero = () => {
-  return <h4>hero</h4>
-}
+  return (
+    <Wrapper className="section-center">
+      <div>
+        <h2>Design Your Comfort Zone</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+          molestiae nostrum praesentium placeat ea voluptatibus error corporis
+          eius veniam, debitis, qui sapiente incidunt perferendis. Quas odio
+          reiciendis dolor inventore aliquam,
+        </p>
+      </div>
+      <div className="img-container">
+        <img src={heroBcg} alt="heroimg" className="main-img" />
+        <img src={heroBcg2} alt="heroimg2" className="accent-img" />
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   min-height: 60vh;
@@ -27,11 +43,11 @@ const Wrapper = styled.section`
     height: calc(100vh - 5rem);
     grid-template-columns: 1fr 1fr;
     gap: 8rem;
-    h1 {
+    h2 {
       margin-bottom: 2rem;
     }
     p {
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
     .hero-btn {
       padding: 0.75rem 1.5rem;
@@ -40,10 +56,12 @@ const Wrapper = styled.section`
     .img-container {
       display: block;
       position: relative;
+      margin-top: 2rem;
+      margin-right: -2rem;
     }
     .main-img {
       width: 100%;
-      height: 550px;
+      height: 400px;
       position: relative;
       border-radius: var(--radius);
       display: block;
@@ -58,7 +76,7 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
     }
     .img-container::before {
-      content: '';
+      content: "";
       position: absolute;
       width: 10%;
       height: 80%;
@@ -68,6 +86,6 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
     }
   }
-`
+`;
 
-export default Hero
+export default Hero;

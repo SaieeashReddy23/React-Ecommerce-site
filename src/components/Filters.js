@@ -1,12 +1,66 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useFilterContext } from '../context/filter_context'
-import { getUniqueValues, formatPrice } from '../utils/helpers'
-import { FaCheck } from 'react-icons/fa'
+import React from "react";
+import styled from "styled-components";
+import { useFilterContext } from "../context/filter_context";
+import { getUniqueValues, formatPrice } from "../utils/helpers";
+import { FaCheck } from "react-icons/fa";
 
 const Filters = () => {
-  return <h4>filters</h4>
-}
+  return (
+    <Wrapper>
+      <div className="content">
+        <form className="form-control">
+          <input type="text" className="search-input" placeholder="Search" />
+        </form>
+        <div className="block">
+          <h4>Category</h4>
+          <button>All</button>
+          <button>Bedroom</button>
+          <button>Office</button>
+          <button>Kitchen</button>
+          <button>Livingroom</button>
+          <button>Kids</button>
+          <button>Dining</button>
+        </div>
+
+        <div className="block">
+          <h4>Company</h4>
+          <select name="" id="" className="company">
+            <option value="marcos" selected disabled>
+              marcos
+            </option>
+          </select>
+        </div>
+
+        <div className="block">
+          <h4>Colors</h4>
+          <div className="colors">
+            <button className="all-btn active">All</button>
+            <button className="color-btn">All</button>
+            <button className="color-btn">All</button>
+            <button className="color-btn">All</button>
+          </div>
+        </div>
+        <div className="block">
+          <h4>Price</h4>
+          <p>$3299.99</p>
+          <input
+            type="range"
+            min="1"
+            max="100"
+            class="slider"
+            id="myRange"
+          ></input>
+        </div>
+        <div className="shipping block">
+          <label htmlFor="ship">Free Shipping</label>
+          <input type="checkbox" id="ship" />
+        </div>
+
+        <button className="clear-btn block">Clear Filters</button>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   .form-control {
@@ -14,6 +68,10 @@ const Wrapper = styled.section`
     h5 {
       margin-bottom: 0.5rem;
     }
+  }
+
+  .block {
+    margin-top:1rem;
   }
   .search-input {
     padding: 0.5rem;
@@ -37,6 +95,11 @@ const Wrapper = styled.section`
     letter-spacing: var(--spacing);
     color: var(--clr-grey-5);
     cursor: pointer;
+  }
+
+  button:hover{
+     border-color: var(--clr-grey-5);
+  }
   }
   .active {
     border-color: var(--clr-grey-5);
@@ -105,6 +168,6 @@ const Wrapper = styled.section`
       top: 1rem;
     }
   }
-`
+`;
 
-export default Filters
+export default Filters;
