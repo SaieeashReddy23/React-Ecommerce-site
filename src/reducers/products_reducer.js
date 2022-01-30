@@ -21,17 +21,32 @@ const products_reducer = (state, action) => {
       return { ...state, loading: true };
 
     case GET_PRODUCTS_SUCCESS:
-      return { ...state, loading: false, products: action.response };
+      const featured_products = action.response.filter(
+        (item) => item.featured === true
+      );
+
+      return {
+        ...state,
+        loading: false,
+        products: action.response,
+        featured_products,
+      };
 
     case GET_PRODUCTS_ERROR:
       return { ...state, error: true };
 
     case GET_SINGLE_PRODUCT_BEGIN:
-      break;
+      return { ...state, single_loading: true };
+
     case GET_SINGLE_PRODUCT_SUCCESS:
-      break;
+      return {
+        ...state,
+        single_loading: false,
+        single_product: action.payload,
+      };
+
     case GET_SINGLE_PRODUCT_ERROR:
-      break;
+      return { ...state, single_error: true, single_loading: false };
 
     default:
       throw new Error(`No Matching "${action.type}" - action type`);

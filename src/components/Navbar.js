@@ -22,24 +22,16 @@ const Nav = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <Link to="/">
-              <a>Home</a>
-            </Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a>
-              <Link to="/about">About</Link>
-            </a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a>
-              <Link to="/products"> Products</Link>
-            </a>
+            <Link to="/products"> Products</Link>
           </li>
           <li>
-            <a>
-              <Link to="/checkout">Checkout</Link>
-            </a>
+            <Link to="/checkout">Checkout</Link>
           </li>
         </ul>
 
@@ -52,7 +44,7 @@ const Nav = () => {
 };
 
 const NavContainer = styled.nav`
-  height: 10vh;
+  height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;

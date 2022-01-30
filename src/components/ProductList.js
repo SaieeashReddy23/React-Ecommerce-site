@@ -10,8 +10,8 @@ const ProductList = () => {
 
   return (
     <>
-      {/* <GridView items={products} /> */}
-      <ListView items={products} />
+      <GridView items={products} />
+      {/* <ListView items={products} /> */}
     </>
   );
 };

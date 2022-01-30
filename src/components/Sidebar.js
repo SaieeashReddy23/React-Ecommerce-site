@@ -22,24 +22,16 @@ const Sidebar = () => {
         </div>
         <ul className="links">
           <li>
-            <a>
-              <Link to="/"> Home</Link>
-            </a>
+            <Link to="/"> Home</Link>
           </li>
           <li>
-            <a>
-              <Link to="/about">About</Link>
-            </a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a>
-              <Link to="/products"> Products</Link>
-            </a>
+            <Link to="/products"> Products</Link>
           </li>
           <li>
-            <a>
-              <Link to="/checkout">Checkout</Link>
-            </a>
+            <Link to="/checkout">Checkout</Link>
           </li>
         </ul>
 

@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 const PageHero = ({ title }) => {
   return (
     <Wrapper>
-      <a className="section-center">
-        <h4>
-          <Link to="/"> Home / </Link>
-          <b>{title}</b>
-        </h4>
-      </a>
+      <h4 className="section-center">
+        <Link to="/"> Home / </Link>
+        <b>{title}</b>
+      </h4>
     </Wrapper>
   );
 };
@@ -17,7 +15,7 @@ const PageHero = ({ title }) => {
 const Wrapper = styled.section`
   background: var(--clr-primary-10);
   width: 100%;
-  min-height: 15vh;
+  min-height: 5rem;
   display: flex;
   align-items: center;
 

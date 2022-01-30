@@ -7,10 +7,19 @@ import Loading from "./Loading";
 import Product from "./Product";
 
 const FeaturedProducts = () => {
+  const { featured_products } = useProductsContext();
+
   return (
     <Wrapper>
       <h1>Featured Products</h1>
-      <div className="featured"></div>
+      <div className="section-center featured">
+        {featured_products.map((item, index) => {
+          const { image, name, price } = item;
+          if (index < 3) {
+            return <Product key={index} {...item} />;
+          }
+        })}
+      </div>
       <Link to="/products">
         <button className="btn">All Products</button>
       </Link>
