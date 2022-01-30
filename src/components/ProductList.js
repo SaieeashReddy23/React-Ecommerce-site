@@ -6,12 +6,15 @@ import ListView from "./ListView";
 import { useProductsContext } from "../context/products_context";
 
 const ProductList = () => {
-  const { products } = useProductsContext();
+  const { products, list_view } = useProductsContext();
 
   return (
     <>
-      <GridView items={products} />
-      {/* <ListView items={products} /> */}
+      {list_view ? (
+        <ListView items={products} />
+      ) : (
+        <GridView items={products} />
+      )}
     </>
   );
 };

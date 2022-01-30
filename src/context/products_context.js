@@ -24,6 +24,7 @@ const initialState = {
   single_product: {},
   single_error: false,
   single_loading: false,
+  list_view: false,
 };
 
 const ProductsContext = React.createContext();
@@ -70,9 +71,24 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: SIDEBAR_CLOSE });
   };
 
+  const setGridView = () => {
+    dispatch({ type: "GRID_VIEW" });
+  };
+
+  const setListView = () => {
+    dispatch({ type: "LIST_VIEW" });
+  };
+
   return (
     <ProductsContext.Provider
-      value={{ ...state, openSidebar, closeSidebar, getSingleProduct }}
+      value={{
+        ...state,
+        openSidebar,
+        closeSidebar,
+        getSingleProduct,
+        setGridView,
+        setListView,
+      }}
     >
       {children}
     </ProductsContext.Provider>

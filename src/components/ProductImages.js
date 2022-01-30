@@ -32,7 +32,7 @@ const ProductImages = ({ images }) => {
 
 const Wrapper = styled.section`
   .main {
-    height: 600px;
+    height: 700px;
   }
   img {
     width: 100%;

@@ -8,7 +8,7 @@ const AboutPage = () => {
     <div>
       <PageHero title="About" />
 
-      <Wrapper className="section-center">
+      <Wrapper className="section-center ">
         <div>
           <img src={aboutImg} alt="about image" />
         </div>
@@ -36,7 +36,8 @@ const AboutPage = () => {
 const Wrapper = styled.section`
   display: grid;
   gap: 4rem;
-
+  margin-top: 2rem;
+  min-height: calc(100vh - (27vh));
   img {
     width: 100%;
     display: block;

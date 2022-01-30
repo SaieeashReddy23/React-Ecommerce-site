@@ -1,20 +1,29 @@
 import React from "react";
 import { useFilterContext } from "../context/filter_context";
 import { BsFillGridFill, BsList } from "react-icons/bs";
+
+import { useProductsContext } from "../context/products_context";
 import styled from "styled-components";
+
 const Sort = () => {
+  const { setGridView, setListView, list_view } = useProductsContext();
   return (
     <Wrapper>
       <div className="btn-container">
-        <BsFillGridFill />
-        <BsList />
+        <BsFillGridFill
+          className={list_view ? "" : "active"}
+          onClick={setGridView}
+        />
+        <BsList className={list_view ? "active" : ""} onClick={setListView} />
       </div>
       <div className="active">
         17 products are found
         kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
       </div>
       <div>
-        <label htmlFor="sort">sort by</label>
+        <label htmlFor="sort">
+          <span>sort by</span>
+        </label>
 
         <select name="sort" id="sort" className="sort-input">
           <option value="">Price (Lowest)</option>
@@ -33,6 +42,16 @@ const Wrapper = styled.section`
   align-items: center;
   margin-bottom: 2rem;
   column-gap: 2rem;
+
+  option {
+    font-weight: 500;
+    border-radius: 0.25rem;
+  }
+
+  span {
+    font-weight: 500;
+  }
+
   @media (max-width: 576px) {
     display: grid;
     grid-template-columns: 1fr;
@@ -83,6 +102,7 @@ const Wrapper = styled.section`
     font-size: 1rem;
     text-transform: capitalize;
     padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
   }
   label {
     font-size: 1rem;

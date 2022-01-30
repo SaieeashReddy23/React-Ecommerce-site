@@ -65,7 +65,18 @@ const SingleProductPage = () => {
 
           <div className="info" style={{ marginTop: "1rem" }}>
             <span>Colors :</span>
+            <p>
+              <span>red</span> <span>blue</span>{" "}
+            </p>
           </div>
+
+          <div className="bag">
+            <button className="inc-btn">-</button>
+            <span className="ele">5</span>
+            <button className="inc-btn">+</button>
+          </div>
+
+          <button className="btn">ADD TO CART</button>
         </div>
       </div>
     </Wrapper>
@@ -73,6 +84,33 @@ const SingleProductPage = () => {
 };
 
 const Wrapper = styled.main`
+  .bag {
+    margin-left: -2rem;
+    margin-top: -3rem;
+  }
+  .ele {
+    font-size: 4rem;
+    font-weight: 500;
+  }
+  .inc-btn {
+    text-transform: uppercase;
+    background: white;
+
+    padding: 0 1rem;
+    margin: 0 1rem;
+    letter-spacing: var(--spacing);
+    display: inline-block;
+    font-weight: 400;
+    transition: var(--transition);
+    font-size: 3rem;
+    cursor: pointer;
+
+    border-radius: var(--radius);
+    border-color: transparent;
+  }
+  .inc-btn:hover {
+    border: 1px solid blue;
+  }
   .product-center {
     display: grid;
     gap: 4rem;
@@ -88,6 +126,7 @@ const Wrapper = styled.main`
   .info {
     text-transform: capitalize;
     width: 300px;
+
     display: grid;
     grid-template-columns: 125px 1fr;
     span {
