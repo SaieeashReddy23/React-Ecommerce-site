@@ -63,20 +63,11 @@ const SingleProductPage = () => {
 
           <hr />
 
-          <div className="info" style={{ marginTop: "1rem" }}>
-            <span>Colors :</span>
-            <p>
-              <span>red</span> <span>blue</span>{" "}
-            </p>
-          </div>
-
-          <div className="bag">
-            <button className="inc-btn">-</button>
-            <span className="ele">5</span>
-            <button className="inc-btn">+</button>
-          </div>
-
-          <button className="btn">ADD TO CART</button>
+          {stock > 0 ? (
+            <AddToCart product={single_product} />
+          ) : (
+            <p>Out of stock</p>
+          )}
         </div>
       </div>
     </Wrapper>
@@ -89,7 +80,7 @@ const Wrapper = styled.main`
     margin-top: -3rem;
   }
   .ele {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 500;
   }
   .inc-btn {

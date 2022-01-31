@@ -23,12 +23,14 @@ export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [filterState, dispatchFilter] = useReducer(reducer, initialState);
 
-  useEffect(() => {
+  console.log(filterState.filteredData);
+
+  const loadProducts = () => {
     dispatchFilter({ type: LOAD_PRODUCTS, data: products });
-  }, []);
+  };
 
   return (
-    <FilterContext.Provider value={{ ...filterState }}>
+    <FilterContext.Provider value={{ ...filterState, loadProducts }}>
       {children}
     </FilterContext.Provider>
   );

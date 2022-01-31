@@ -12,7 +12,6 @@ import {
 const filter_reducer = (state, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
-      console.log(action.data);
       return { ...state, filteredData: action.data };
     case SET_LISTVIEW:
       break;
