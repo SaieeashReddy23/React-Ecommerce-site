@@ -15,16 +15,19 @@ import { useProductsContext } from "./products_context";
 const initialState = {
   filteredData: [],
   list_view: false,
-  categoryFilter: false,
-  category: "",
-  searchFilter: false,
-  search: "",
-  colorsFilter: false,
-  colors: "",
-  priceFilter: false,
-  price: 0,
-  freeShipping: false,
+  all_products: [],
   sort: "lowestToHighest",
+  sai: [],
+  filters: {
+    text: "",
+    company: "all",
+    category: "all",
+    color: "all",
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    shipping: false,
+  },
 };
 
 const FilterContext = React.createContext();
@@ -32,11 +35,6 @@ const FilterContext = React.createContext();
 export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [filterState, dispatchFilter] = useReducer(reducer, initialState);
-
-  const loadProducts = () => {
-    const newProducts = products.sort((a, b) => a.price - b.price);
-    dispatchFilter({ type: LOAD_PRODUCTS, data: newProducts });
-  };
 
   const setGridView = () => {
     dispatchFilter({ type: SET_GRIDVIEW });
@@ -46,86 +44,43 @@ export const FilterProvider = ({ children }) => {
     dispatchFilter({ type: SET_LISTVIEW });
   };
 
-  const selectCategory = (category) => {
-    if (category === "All") {
-      dispatchFilter({
-        type: UPDATE_FILTERS,
-        payload: {
-          categoryFilter: false,
-          category: "",
-        },
-      });
-      dispatchFilter({ type: FILTER_PRODUCTS, payload: products });
-    } else {
-      dispatchFilter({
-        type: UPDATE_FILTERS,
-        payload: {
-          categoryFilter: true,
-          category: category,
-        },
-      });
-      filterProducts(category);
-    }
-  };
+  const updateFilter = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
 
-  const filterProducts = (category) => {
-    const newProducts = products.filter((item) => item.category === category);
+    console.log("inside the updatefilter");
+    console.log(name);
+    console.log(value);
 
-    dispatchFilter({ type: FILTER_PRODUCTS, payload: newProducts });
-  };
-
-  const sortProducts = (value) => {
-    dispatchFilter({ type: UPDATE_SORT, payload: value });
-    reallySortProducts(value);
-  };
-
-  const compare = (a, b) => {
-    if (a.name < b.name) {
-      return -1;
+    if (name === "shipping") {
+      value = e.target.checked;
     }
 
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
+    dispatchFilter({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const reallySortProducts = (value) => {
-    if (value === "lowestToHighest") {
-      const newData = filterState.filteredData.sort(
-        (a, b) => a.price - b.price
-      );
-      dispatchFilter({ type: SORT_PRODUCTS, payload: newData });
-    } else if (value === "highestToLowest") {
-      const newData = filterState.filteredData.sort(
-        (a, b) => b.price - a.price
-      );
-      dispatchFilter({ type: SORT_PRODUCTS, payload: newData });
-    } else if (value === "a_z") {
-      const newData = filterState.filteredData.sort((a, b) => compare(a, b));
-
-      dispatchFilter({ type: SORT_PRODUCTS, payload: newData });
-    } else {
-      const newData = filterState.filteredData.sort((a, b) => compare(b, a));
-
-      dispatchFilter({ type: SORT_PRODUCTS, payload: newData });
-    }
+  const clearFilter = () => {
+    dispatchFilter({ type: CLEAR_FILTERS });
   };
 
   useEffect(() => {
-    loadProducts();
+    dispatchFilter({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
+
+  useEffect(() => {
+    dispatchFilter({ type: FILTER_PRODUCTS });
+    dispatchFilter({ type: SORT_PRODUCTS });
+  }, [products, filterState.sort, filterState.filters]);
 
   return (
     <FilterContext.Provider
       value={{
         ...filterState,
-        loadProducts,
+
         setGridView,
         setListView,
-        selectCategory,
-        sortProducts,
-        reallySortProducts,
+        updateFilter,
+        clearFilter,
       }}
     >
       {children}
