@@ -3,23 +3,15 @@ import { useFilterContext } from "../context/filter_context";
 import GridView from "./GridView";
 import ListView from "./ListView";
 
-import { useProductsContext } from "../context/products_context";
-
 const ProductList = () => {
-  const { products, list_view } = useProductsContext();
-
-  const { filteredData, loadProducts } = useFilterContext();
-
-  useEffect(() => {
-    loadProducts();
-  }, [products]);
+  const { filteredData, list_view } = useFilterContext();
 
   return (
     <>
       {list_view ? (
-        <ListView items={products} />
+        <ListView items={filteredData} />
       ) : (
-        <GridView items={products} />
+        <GridView items={filteredData} />
       )}
     </>
   );

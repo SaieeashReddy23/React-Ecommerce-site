@@ -48,12 +48,6 @@ const products_reducer = (state, action) => {
     case GET_SINGLE_PRODUCT_ERROR:
       return { ...state, single_error: true, single_loading: false };
 
-    case "GRID_VIEW":
-      return { ...state, list_view: false };
-
-    case "LIST_VIEW":
-      return { ...state, list_view: true };
-
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }

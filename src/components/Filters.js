@@ -5,6 +5,7 @@ import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
 
 const Filters = () => {
+  const { selectCategory, category, categoryFilter } = useFilterContext();
   return (
     <Wrapper>
       <div className="content">
@@ -13,22 +14,63 @@ const Filters = () => {
         </form>
         <div className="block">
           <h4>Category</h4>
-          <button>All</button>
-          <button>Bedroom</button>
-          <button>Office</button>
-          <button>Kitchen</button>
-          <button>Livingroom</button>
-          <button>Kids</button>
-          <button>Dining</button>
+          <button
+            onClick={() => selectCategory("All")}
+            className={categoryFilter ? " " : "active"}
+          >
+            All
+          </button>
+          <button
+            onClick={() => selectCategory("bedroom")}
+            className={
+              categoryFilter && category === "bedroom" ? "active" : " "
+            }
+          >
+            Bedroom
+          </button>
+          <button
+            onClick={() => selectCategory("office")}
+            className={categoryFilter && category === "office" ? "active" : " "}
+          >
+            Office
+          </button>
+          <button
+            onClick={() => selectCategory("kitchen")}
+            className={
+              categoryFilter && category === "kitchen" ? "active" : " "
+            }
+          >
+            Kitchen
+          </button>
+          <button
+            onClick={() => selectCategory("living room")}
+            className={
+              categoryFilter && category === "living room" ? "active" : " "
+            }
+          >
+            Livingroom
+          </button>
+          <button
+            onClick={() => selectCategory("kids")}
+            className={categoryFilter && category === "kids" ? "active" : " "}
+          >
+            Kids
+          </button>
+          <button
+            onClick={() => selectCategory("dining")}
+            className={categoryFilter && category === "dining" ? "active" : " "}
+          >
+            Dining
+          </button>
         </div>
 
         <div className="block">
           <h4>Company</h4>
-          <select name="" id="" className="company">
+          {/* <select name="" id="" className="company">
             <option value="marcos" selected disabled>
               marcos
             </option>
-          </select>
+          </select> */}
         </div>
 
         <div className="block">
@@ -42,12 +84,12 @@ const Filters = () => {
         </div>
         <div className="block">
           <h4>Price</h4>
-          <p>$3299.99</p>
+          <p> {formatPrice(3299.999)}</p>
           <input
             type="range"
             min="1"
             max="100"
-            class="slider"
+            className="slider"
             id="myRange"
           ></input>
         </div>

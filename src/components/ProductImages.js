@@ -14,10 +14,11 @@ const ProductImages = ({ images }) => {
       />
 
       <div className="gallery">
-        {images.map(({ thumbnails }) => {
+        {images.map(({ thumbnails }, index) => {
           const { small } = thumbnails;
           return (
             <img
+              key={index}
               src={small.url}
               alt="image"
               height={small.height}

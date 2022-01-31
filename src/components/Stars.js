@@ -20,22 +20,22 @@ const Stars = ({ stars, reviews }) => {
 
   return (
     <Wrapper>
-      {arr.map((num) => {
+      {arr.map((num, index) => {
         if (num === 1) {
           return (
-            <span>
+            <span key={index}>
               <BsStarFill />
             </span>
           );
         } else if (num === 0.5) {
           return (
-            <span>
+            <span key={index}>
               <BsStarHalf />
             </span>
           );
         } else {
           return (
-            <span>
+            <span key={index}>
               <BsStar />
             </span>
           );

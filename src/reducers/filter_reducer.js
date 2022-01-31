@@ -14,17 +14,27 @@ const filter_reducer = (state, action) => {
     case LOAD_PRODUCTS:
       return { ...state, filteredData: action.data };
     case SET_LISTVIEW:
-      break;
+      return { ...state, list_view: true };
+
     case SET_GRIDVIEW:
-      break;
+      return { ...state, list_view: false };
+
     case UPDATE_SORT:
-      break;
+      return { ...state, sort: action.payload };
+
     case SORT_PRODUCTS:
-      break;
+      return { ...state, filteredData: action.payload };
+
     case UPDATE_FILTERS:
-      break;
+      return {
+        ...state,
+        categoryFilter: action.payload.categoryFilter,
+        category: action.payload.category,
+      };
+
     case FILTER_PRODUCTS:
-      break;
+      return { ...state, filteredData: action.payload };
+
     case CLEAR_FILTERS:
       break;
 

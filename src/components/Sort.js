@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFilterContext } from "../context/filter_context";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 
@@ -6,7 +6,15 @@ import { useProductsContext } from "../context/products_context";
 import styled from "styled-components";
 
 const Sort = () => {
-  const { setGridView, setListView, list_view } = useProductsContext();
+  const {
+    setGridView,
+    setListView,
+    list_view,
+    sortProducts,
+    sort,
+    reallySortProducts,
+  } = useFilterContext();
+
   return (
     <Wrapper>
       <div className="btn-container">
@@ -25,11 +33,17 @@ const Sort = () => {
           <span>sort by</span>
         </label>
 
-        <select name="sort" id="sort" className="sort-input">
-          <option value="">Price (Lowest)</option>
-          <option value="">Price (Highest)</option>
-          <option value="">Name (A - Z)</option>
-          <option value="">Name (Z - A)</option>
+        <select
+          name="sort"
+          id="sort"
+          className="sort-input"
+          value={sort}
+          onChange={(e) => sortProducts(e.target.value)}
+        >
+          <option value="lowestToHighest">Price (Lowest)</option>
+          <option value="highestToLowest">Price (Highest)</option>
+          <option value="a_z">Name (A - Z)</option>
+          <option value="z_a">Name (Z - A)</option>
         </select>
       </div>
     </Wrapper>
