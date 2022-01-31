@@ -1,104 +1,144 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
 
 const Filters = () => {
-  const { selectCategory, category, categoryFilter } = useFilterContext();
+  const { selectCategory, categoryFilter, searchProducts } = useFilterContext();
+
+  const {
+    filters: {
+      text,
+      company,
+      category,
+      color,
+      min_price,
+      max_price,
+      price,
+      shipping,
+    },
+    all_products,
+    filteredData,
+    updateFilter,
+    clearFilter,
+  } = useFilterContext();
+
+  const [categories, setCategories] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    setCategories(getUniqueValues(all_products, "category"));
+    setCompanies(getUniqueValues(all_products, "company"));
+    setColors(getUniqueValues(all_products, "colors"));
+  }, [all_products]);
+
   return (
     <Wrapper>
       <div className="content">
-        <form className="form-control">
-          <input type="text" className="search-input" placeholder="Search" />
+        <form className="form-control" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            name="text"
+            className="search-input"
+            placeholder="Search"
+            value={text}
+            onChange={updateFilter}
+          />
         </form>
+
         <div className="block">
-          <h4>Category</h4>
-          <button
-            onClick={() => selectCategory("All")}
-            className={categoryFilter ? " " : "active"}
-          >
-            All
-          </button>
-          <button
-            onClick={() => selectCategory("bedroom")}
-            className={
-              categoryFilter && category === "bedroom" ? "active" : " "
-            }
-          >
-            Bedroom
-          </button>
-          <button
-            onClick={() => selectCategory("office")}
-            className={categoryFilter && category === "office" ? "active" : " "}
-          >
-            Office
-          </button>
-          <button
-            onClick={() => selectCategory("kitchen")}
-            className={
-              categoryFilter && category === "kitchen" ? "active" : " "
-            }
-          >
-            Kitchen
-          </button>
-          <button
-            onClick={() => selectCategory("living room")}
-            className={
-              categoryFilter && category === "living room" ? "active" : " "
-            }
-          >
-            Livingroom
-          </button>
-          <button
-            onClick={() => selectCategory("kids")}
-            className={categoryFilter && category === "kids" ? "active" : " "}
-          >
-            Kids
-          </button>
-          <button
-            onClick={() => selectCategory("dining")}
-            className={categoryFilter && category === "dining" ? "active" : " "}
-          >
-            Dining
-          </button>
+          <h4>category</h4>
+          {categories.map((categ, index) => {
+            return (
+              <button
+                key={index}
+                onClick={updateFilter}
+                value={categ}
+                name="category"
+                className={category === categ ? "active" : ""}
+              >
+                {categ}
+              </button>
+            );
+          })}
         </div>
 
         <div className="block">
           <h4>Company</h4>
-          {/* <select name="" id="" className="company">
-            <option value="marcos" selected disabled>
-              marcos
-            </option>
-          </select> */}
+          <select name="company" className="company" onChange={updateFilter}>
+            {companies.map((company, index) => {
+              return (
+                <option key={index} className="company" value={company}>
+                  {company}
+                </option>
+              );
+            })}
+          </select>
         </div>
 
         <div className="block">
           <h4>Colors</h4>
           <div className="colors">
-            <button className="all-btn active">All</button>
-            <button className="color-btn">All</button>
-            <button className="color-btn">All</button>
-            <button className="color-btn">All</button>
+            {colors.map((col, index) => {
+              if (col === "all") {
+                return (
+                  <button
+                    className={color === col ? "active" : ""}
+                    onClick={updateFilter}
+                    name="color"
+                    value={col}
+                    key={index}
+                    style={{ margin: "0 0.5rem" }}
+                  >
+                    all
+                  </button>
+                );
+              }
+              return (
+                <button
+                  onClick={updateFilter}
+                  className={color === col ? "color-btn active" : "color-btn"}
+                  name="color"
+                  value={col}
+                  key={index}
+                  style={{ background: `${col}` }}
+                >
+                  {color === col && <FaCheck />}
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="block">
           <h4>Price</h4>
-          <p> {formatPrice(3299.999)}</p>
+          <p> {formatPrice(price)}</p>
           <input
             type="range"
-            min="1"
-            max="100"
+            min={min_price}
+            max={max_price}
             className="slider"
             id="myRange"
+            name="price"
+            value={price}
+            onChange={updateFilter}
           ></input>
         </div>
         <div className="shipping block">
-          <label htmlFor="ship">Free Shipping</label>
-          <input type="checkbox" id="ship" />
+          <label htmlFor="shipping">Free Shipping</label>
+          <input
+            type="checkbox"
+            id="shipping"
+            name="shipping"
+            checked={shipping}
+            onChange={updateFilter}
+          />
         </div>
 
-        <button className="clear-btn block">Clear Filters</button>
+        <button className="clear-btn block" onClick={clearFilter}>
+          Clear Filters
+        </button>
       </div>
     </Wrapper>
   );

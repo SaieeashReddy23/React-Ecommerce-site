@@ -6,14 +6,8 @@ import { useProductsContext } from "../context/products_context";
 import styled from "styled-components";
 
 const Sort = () => {
-  const {
-    setGridView,
-    setListView,
-    list_view,
-    sortProducts,
-    sort,
-    reallySortProducts,
-  } = useFilterContext();
+  const { setGridView, setListView, list_view, sort, updateFilter } =
+    useFilterContext();
 
   return (
     <Wrapper>
@@ -38,7 +32,7 @@ const Sort = () => {
           id="sort"
           className="sort-input"
           value={sort}
-          onChange={(e) => sortProducts(e.target.value)}
+          onChange={updateFilter}
         >
           <option value="lowestToHighest">Price (Lowest)</option>
           <option value="highestToLowest">Price (Highest)</option>

@@ -12,7 +12,19 @@ import {
 const filter_reducer = (state, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
-      return { ...state, filteredData: action.data };
+      const temp = action.payload.map((a) => a.price);
+      const max_price = Math.max(...temp);
+
+      return {
+        ...state,
+        filteredData: action.payload,
+        all_products: action.payload,
+        filters: {
+          ...state.filters,
+          max_price: max_price,
+          price: max_price,
+        },
+      };
     case SET_LISTVIEW:
       return { ...state, list_view: true };
 
@@ -23,20 +35,108 @@ const filter_reducer = (state, action) => {
       return { ...state, sort: action.payload };
 
     case SORT_PRODUCTS:
-      return { ...state, filteredData: action.payload };
+      const { sort, filteredData } = state;
+      const compare = (a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      };
+      let newData;
+      if (sort === "lowestToHighest") {
+        newData = filteredData.sort((a, b) => a.price - b.price);
+      } else if (sort === "highestToLowest") {
+        newData = filteredData.sort((a, b) => b.price - a.price);
+      } else if (sort === "a_z") {
+        newData = filteredData.sort((a, b) => compare(a, b));
+      } else {
+        newData = filteredData.sort((a, b) => compare(b, a));
+      }
+
+      return { ...state, filteredData: newData };
 
     case UPDATE_FILTERS:
+      const name = action.payload.name;
+      const value = action.payload.value;
+
+      console.log(" inside the reducer");
+      console.log(name);
+      console.log(value);
+
       return {
         ...state,
-        categoryFilter: action.payload.categoryFilter,
-        category: action.payload.category,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
       };
 
     case FILTER_PRODUCTS:
-      return { ...state, filteredData: action.payload };
+      const { all_products } = state;
+      const { text, category, company, color, price, shipping } = state.filters;
+
+      let tempProducts = [...all_products];
+
+      if (text) {
+        console.log("ENtered in the text block");
+        tempProducts = all_products.filter((product) => {
+          return product.name.toLowerCase().startsWith(text);
+        });
+      }
+
+      if (category !== "all") {
+        tempProducts = tempProducts.filter((product) => {
+          return product.category === category;
+        });
+      }
+
+      if (company !== "all") {
+        tempProducts = tempProducts.filter((product) => {
+          return product.company === company;
+        });
+      }
+
+      if (shipping) {
+        tempProducts = tempProducts.filter((product) => {
+          return product.shipping === true;
+        });
+      }
+
+      // tempProducts = tempProducts.filter(({ colors }) => {
+      //   let found = false;
+      //   colors.map((c) => {
+      //     if (c === color) {
+      //       found = true;
+      //     }
+      //   });
+      //   return found;
+      // });
+
+      tempProducts = tempProducts.filter((product) => {
+        return product.price <= price;
+      });
+
+      return {
+        ...state,
+        filteredData: tempProducts,
+      };
 
     case CLEAR_FILTERS:
-      break;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          text: "",
+          company: "all",
+          category: "all",
+          color: "all",
+          shipping: false,
+        },
+      };
 
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
