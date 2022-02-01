@@ -8,10 +8,11 @@ import AmountButtons from "./AmountButtons";
 const AddToCart = ({ product }) => {
   const { colors, id, stock } = product;
 
+  const { addToCart } = useCartContext();
+
   const [mainColor, setMainColor] = useState(colors[0]);
 
   const [noOfItems, setNoOfItems] = useState(1);
-  console.log(noOfItems);
 
   const increase = () => {
     if (noOfItems < stock) {
@@ -46,7 +47,14 @@ const AddToCart = ({ product }) => {
         </div>
       </div>
 
-      <div className="btn-container">
+      <AmountButtons
+        className="btn-container"
+        decrease={decrease}
+        increase={increase}
+        val={noOfItems}
+      />
+
+      {/* <div className="btn-container">
         <button className="inc-btn" onClick={decrease}>
           -
         </button>
@@ -54,10 +62,15 @@ const AddToCart = ({ product }) => {
         <button className="inc-btn" onClick={increase}>
           +
         </button>
-      </div>
+      </div> */}
 
       <Link to="/cart">
-        <button className="btn">ADD TO CART</button>
+        <button
+          className="btn"
+          onClick={() => addToCart(id, mainColor, noOfItems, product)}
+        >
+          ADD TO CART
+        </button>
       </Link>
     </Wrapper>
   );
