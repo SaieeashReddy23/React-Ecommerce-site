@@ -36,8 +36,8 @@ const AboutPage = () => {
 const Wrapper = styled.section`
   display: grid;
   gap: 4rem;
-  margin-top: 2rem;
-  min-height: calc(100vh - (27vh));
+  margin-top: 2.3rem;
+  min-height: calc(100vh - (58vh));
   img {
     width: 100%;
     display: block;
@@ -63,7 +63,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     grid-template-columns: 1fr 2fr;
-    height: 65vh;
+    min-height: 59vh;
   }
 `;
 export default AboutPage;

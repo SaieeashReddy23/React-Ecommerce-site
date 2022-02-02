@@ -13,6 +13,7 @@ const Sort = () => {
     sort,
     updateFilter,
     filteredData,
+    updateSort,
   } = useFilterContext();
 
   return (
@@ -35,8 +36,7 @@ const Sort = () => {
           name="sort"
           id="sort"
           className="sort-input"
-          value={sort}
-          onChange={updateFilter}
+          onChange={updateSort}
         >
           <option value="lowestToHighest">Price (Lowest)</option>
           <option value="highestToLowest">Price (Highest)</option>

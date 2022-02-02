@@ -48,15 +48,15 @@ export const FilterProvider = ({ children }) => {
     const name = e.target.name;
     let value = e.target.value;
 
-    console.log("inside the updatefilter");
-    console.log(name);
-    console.log(value);
-
     if (name === "shipping") {
       value = e.target.checked;
     }
 
     dispatchFilter({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const updateSort = (e) => {
+    dispatchFilter({ type: UPDATE_SORT, payload: e.target.value });
   };
 
   const clearFilter = () => {
@@ -76,7 +76,7 @@ export const FilterProvider = ({ children }) => {
     <FilterContext.Provider
       value={{
         ...filterState,
-
+        updateSort,
         setGridView,
         setListView,
         updateFilter,

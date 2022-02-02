@@ -82,7 +82,7 @@ const filter_reducer = (state, action) => {
       let tempProducts = [...all_products];
 
       if (text) {
-        console.log("ENtered in the text block");
+        console.log("Entered in the text block");
         tempProducts = all_products.filter((product) => {
           return product.name.toLowerCase().startsWith(text);
         });
