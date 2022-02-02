@@ -6,8 +6,14 @@ import { useProductsContext } from "../context/products_context";
 import styled from "styled-components";
 
 const Sort = () => {
-  const { setGridView, setListView, list_view, sort, updateFilter } =
-    useFilterContext();
+  const {
+    setGridView,
+    setListView,
+    list_view,
+    sort,
+    updateFilter,
+    filteredData,
+  } = useFilterContext();
 
   return (
     <Wrapper>
@@ -18,10 +24,8 @@ const Sort = () => {
         />
         <BsList className={list_view ? "active" : ""} onClick={setListView} />
       </div>
-      <div className="active">
-        17 products are found
-        kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-      </div>
+      <div className="active">{filteredData.length} products found</div>
+      <hr />
       <div>
         <label htmlFor="sort">
           <span>sort by</span>

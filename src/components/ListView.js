@@ -9,13 +9,15 @@ const ListView = ({ items }) => {
         ({ id, name, price, image, company, description, category }) => {
           return (
             <article key={id}>
-              <div>
-                <img src={image} alt={name} />
-              </div>
+              <Link to={`/singleProduct/${id}`}>
+                <div>
+                  <img src={image} alt={name} />
+                </div>
+              </Link>
 
               <div>
                 <h4>{name}</h4>
-                <div className="price">${price}</div>
+                <div className="price">{formatPrice(price)}</div>
                 <p>{description}</p>
                 <button className="btn">Details</button>
               </div>

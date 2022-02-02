@@ -15,7 +15,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const SingleProductPage = () => {
-  const { single_product } = useProductsContext();
+  const { single_product, single_error, single_loading } = useProductsContext();
   const {
     images,
     description,
@@ -27,6 +27,14 @@ const SingleProductPage = () => {
     stock,
     id,
   } = single_product;
+
+  if (single_error) {
+    return <Error />;
+  }
+
+  if (single_loading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className="page-100">

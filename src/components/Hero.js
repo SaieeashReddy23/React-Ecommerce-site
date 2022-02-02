@@ -16,10 +16,12 @@ const Hero = () => {
           reiciendis dolor inventore aliquam,
         </p>
       </div>
-      <div className="img-container">
-        <img src={heroBcg} alt="heroimg" className="main-img" />
-        <img src={heroBcg2} alt="heroimg2" className="accent-img" />
-      </div>
+      <Link to="/products">
+        <div className="img-container">
+          <img src={heroBcg} alt="heroimg" className="main-img" />
+          <img src={heroBcg2} alt="heroimg2" className="accent-img" />
+        </div>
+      </Link>
     </Wrapper>
   );
 };

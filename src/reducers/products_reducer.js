@@ -33,7 +33,7 @@ const products_reducer = (state, action) => {
       };
 
     case GET_PRODUCTS_ERROR:
-      return { ...state, error: true };
+      return { ...state, error: true, loading: false };
 
     case GET_SINGLE_PRODUCT_BEGIN:
       return { ...state, single_loading: true };
