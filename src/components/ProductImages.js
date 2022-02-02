@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const ProductImages = ({ images }) => {
-  const mainImage = images[0].thumbnails.large.url;
+  const [mainImage, setMainImage] = useState(images[0].thumbnails.large.url);
+  const [clickImage, setClickImage] = useState(images[0].thumbnails.large.url);
+
   return (
     <Wrapper>
       <img
@@ -15,14 +17,17 @@ const ProductImages = ({ images }) => {
 
       <div className="gallery">
         {images.map(({ thumbnails }, index) => {
-          const { small } = thumbnails;
+          const { small, large } = thumbnails;
           return (
             <img
               key={index}
               src={small.url}
-              alt="image"
+              alt="gallery image"
               height={small.height}
               width={small.width}
+              onClick={() => setClickImage(large.url)}
+              onMouseEnter={() => setMainImage(large.url)}
+              onMouseLeave={() => setMainImage(clickImage)}
             />
           );
         })}

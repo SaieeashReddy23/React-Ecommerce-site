@@ -63,10 +63,6 @@ const filter_reducer = (state, action) => {
       const name = action.payload.name;
       const value = action.payload.value;
 
-      console.log(" inside the reducer");
-      console.log(name);
-      console.log(value);
-
       return {
         ...state,
         filters: {

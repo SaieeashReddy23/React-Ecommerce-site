@@ -16,7 +16,7 @@ const CartItem = ({ id, name, color, amount, image, price, max }) => {
 
   useEffect(() => {
     storeToLocal();
-  }, [amount]);
+  });
 
   return (
     <Wrapper>

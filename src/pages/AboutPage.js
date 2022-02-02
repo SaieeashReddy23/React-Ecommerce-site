@@ -10,7 +10,7 @@ const AboutPage = () => {
 
       <Wrapper className="section-center ">
         <div>
-          <img src={aboutImg} alt="about image" />
+          <img src={aboutImg} alt="About" />
         </div>
 
         <div>
