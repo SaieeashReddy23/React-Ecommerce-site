@@ -16,13 +16,13 @@ const ProductImages = ({ images }) => {
       />
 
       <div className="gallery">
-        {images.map(({ thumbnails }, index) => {
+        {images.map(({ thumbnails, name }, index) => {
           const { small, large } = thumbnails;
           return (
             <img
               key={index}
               src={small.url}
-              alt="gallery image"
+              alt={name}
               height={small.height}
               width={small.width}
               onClick={() => setClickImage(large.url)}

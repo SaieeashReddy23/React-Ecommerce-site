@@ -22,7 +22,6 @@ const FeaturedProducts = () => {
       <h1>Featured Products</h1>
       <div className="section-center featured">
         {featured_products.map((item, index) => {
-          const { image, name, price } = item;
           if (index < 3) {
             return <Product key={index} {...item} />;
           }

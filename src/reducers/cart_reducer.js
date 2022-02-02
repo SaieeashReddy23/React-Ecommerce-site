@@ -59,7 +59,7 @@ const cart_reducer = (state, action) => {
       };
 
     case REMOVE_CART_ITEM:
-      const cart = state.cart.filter((item) => item.id != action.payload);
+      const cart = state.cart.filter((item) => item.id !== action.payload);
       return { ...state, cart };
 
     case TOGGLE_CART_ITEM_AMOUNT:
@@ -106,8 +106,6 @@ const cart_reducer = (state, action) => {
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }
-
-  return state;
 };
 
 export default cart_reducer;

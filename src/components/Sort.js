@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFilterContext } from "../context/filter_context";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 
-import { useProductsContext } from "../context/products_context";
 import styled from "styled-components";
 
 const Sort = () => {
-  const {
-    setGridView,
-    setListView,
-    list_view,
-    sort,
-    updateFilter,
-    filteredData,
-    updateSort,
-  } = useFilterContext();
+  const { setGridView, setListView, list_view, filteredData, updateSort } =
+    useFilterContext();
 
   return (
     <Wrapper>

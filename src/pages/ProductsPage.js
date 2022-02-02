@@ -20,6 +20,7 @@ const ProductsPage = () => {
 
 const Wrapper = styled.div`
   min-height: 80vh;
+
   .products {
     display: grid;
     gap: 3rem 1.5rem;

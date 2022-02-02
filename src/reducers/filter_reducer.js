@@ -73,7 +73,7 @@ const filter_reducer = (state, action) => {
 
     case FILTER_PRODUCTS:
       const { all_products } = state;
-      const { text, category, company, color, price, shipping } = state.filters;
+      const { text, category, company, price, shipping } = state.filters;
 
       let tempProducts = [...all_products];
 
@@ -137,8 +137,6 @@ const filter_reducer = (state, action) => {
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }
-
-  return state;
 };
 
 export default filter_reducer;

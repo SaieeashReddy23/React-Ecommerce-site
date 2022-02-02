@@ -7,11 +7,11 @@ import {
   CLEAR_CART,
   COUNT_CART_TOTALS,
 } from "../actions";
-import { useProductsContext } from "./products_context";
 
 const getCartData = () => {
   const cartdata = localStorage.getItem("cart");
-  if (cartdata === []) {
+
+  if (cartdata) {
     return JSON.parse(localStorage.getItem("cart"));
   }
   return [];
@@ -27,8 +27,6 @@ const initialState = {
 const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
-  const { products } = useProductsContext();
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addToCart = (id, color, amount, product) => {

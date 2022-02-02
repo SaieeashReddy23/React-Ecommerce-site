@@ -3,13 +3,15 @@ import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { links } from "../utils/constants";
+
 import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
+
+  const { myUser } = useUserContext();
 
   return (
     <NavContainer>
@@ -30,25 +32,28 @@ const Nav = () => {
           <li>
             <Link to="/products"> Products</Link>
           </li>
-          <li>
-            <Link to="/checkout">Checkout</Link>
-          </li>
+          {myUser && (
+            <li>
+              <Link to="/checkout">Checkout</Link>
+            </li>
+          )}
         </ul>
 
-        <Link className="cart-btn-wrapper" to="/cart">
+        <div className="cart-btn-wrapper">
           <CartButtons />
-        </Link>
+        </div>
       </div>
     </NavContainer>
   );
 };
 
 const NavContainer = styled.nav`
-  height: 5rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 
   .nav-center {
     width: 90vw;

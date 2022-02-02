@@ -5,12 +5,10 @@ import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
 
 const Filters = () => {
-  const { selectCategory, categoryFilter, searchProducts } = useFilterContext();
-
   const {
     filters: {
       text,
-      company,
+
       category,
       color,
       min_price,
@@ -19,7 +17,7 @@ const Filters = () => {
       shipping,
     },
     all_products,
-    filteredData,
+
     updateFilter,
     clearFilter,
   } = useFilterContext();
@@ -145,6 +143,8 @@ const Filters = () => {
 };
 
 const Wrapper = styled.section`
+  width:100vw;
+
   .form-control {
     margin-bottom: 1.25rem;
     h5 {

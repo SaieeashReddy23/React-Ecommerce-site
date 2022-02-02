@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React from "react";
+
 import { useProductsContext } from "../context/products_context";
-import { single_product_url as url } from "../utils/constants";
+
 import { formatPrice } from "../utils/helpers";
 import {
   Loading,
@@ -28,12 +28,12 @@ const SingleProductPage = () => {
     id,
   } = single_product;
 
-  if (single_error) {
-    return <Error />;
-  }
-
   if (single_loading) {
     return <Loading />;
+  }
+
+  if (single_error) {
+    return <Error />;
   }
 
   return (
@@ -54,7 +54,7 @@ const SingleProductPage = () => {
             <Stars stars={stars} reviews={reviews} />
           </span>
 
-          <h4 className="price">${price / 100}</h4>
+          <h4 className="price">{formatPrice(price)}</h4>
           <p>{description}</p>
           <div className="info">
             <span>Available :</span>

@@ -44,6 +44,7 @@ const Wrapper = styled.section`
   @media (min-width: 992px) {
     height: calc(100vh - 5rem);
     grid-template-columns: 1fr 1fr;
+    width: 100vw;
     gap: 8rem;
     h2 {
       margin-bottom: 2rem;
@@ -59,7 +60,7 @@ const Wrapper = styled.section`
       display: block;
       position: relative;
       margin-top: 2rem;
-      margin-right: -2rem;
+      margin-right: -10rem;
     }
     .main-img {
       width: 100%;

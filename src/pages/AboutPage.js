@@ -37,7 +37,7 @@ const Wrapper = styled.section`
   display: grid;
   gap: 4rem;
   margin-top: 2.3rem;
-  min-height: calc(100vh - (58vh));
+  min-height: 85vh;
   img {
     width: 100%;
     display: block;
@@ -63,7 +63,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     grid-template-columns: 1fr 2fr;
-    min-height: 59vh;
+    min-height: 61vh;
   }
 `;
 export default AboutPage;
