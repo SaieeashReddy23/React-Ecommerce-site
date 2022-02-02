@@ -11,7 +11,7 @@ import { useProductsContext } from "./products_context";
 
 const getCartData = () => {
   const cartdata = localStorage.getItem("cart");
-  if (cartdata) {
+  if (cartdata === []) {
     return JSON.parse(localStorage.getItem("cart"));
   }
   return [];
@@ -32,13 +32,12 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addToCart = (id, color, amount, product) => {
-    console.log(product);
     dispatch({ type: ADD_TO_CART, payload: { id, color, amount, product } });
   };
 
-  const increase = () => {};
-
-  const decrease = () => {};
+  const toggleAmount = (id, value) => {
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+  };
 
   const removeCartItem = (id) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: id });
@@ -48,13 +47,13 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART });
   };
 
-  const countCartTotals = () => {
-    dispatch({ type: COUNT_CART_TOTALS });
+  const storeToLocal = () => {
+    localStorage.setItem("cart", JSON.stringify(state.cart));
   };
 
   useEffect(() => {
-    countCartTotals();
-    localStorage.setItem("cart", JSON.stringify(state.cart));
+    dispatch({ type: COUNT_CART_TOTALS });
+    storeToLocal();
   }, [state.cart]);
 
   return (
@@ -62,11 +61,10 @@ export const CartProvider = ({ children }) => {
       value={{
         ...state,
         addToCart,
-        increase,
-        decrease,
+        toggleAmount,
         clearCart,
-        countCartTotals,
         removeCartItem,
+        storeToLocal,
       }}
     >
       {children}

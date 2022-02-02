@@ -9,17 +9,14 @@ import {
 const cart_reducer = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      const { id, color, amount, item, product } = action.payload;
-      // const cart = [...state.cart, item];
-      // const total_products = state.total_products + amount;
-      // const total_amount = state.total_amount + amount * (item.price / 100);
-
+      const { id, color, amount, product } = action.payload;
       const tempItem = state.cart.find((i) => i.id === id + color);
 
       if (tempItem) {
         const tempCart = state.cart.map((cartItem) => {
           if (cartItem.id === id + color) {
             cartItem.amount += amount;
+            return cartItem;
           } else {
             return cartItem;
           }
@@ -40,7 +37,12 @@ const cart_reducer = (state, action) => {
       }
 
     case CLEAR_CART:
-      return { ...state, cart: [] };
+      return {
+        cart: [],
+        total_amount: 0,
+        total_products_price: 0,
+        shipping: 555,
+      };
 
     case COUNT_CART_TOTALS:
       let total_quantity = 0;
@@ -61,7 +63,45 @@ const cart_reducer = (state, action) => {
       return { ...state, cart };
 
     case TOGGLE_CART_ITEM_AMOUNT:
-      break;
+      const load = action.payload;
+      let car = state.cart;
+      let totalAmount = state.total_amount;
+      let totalPrice = state.total_products_price;
+
+      if (load.value === "increase") {
+        car.map((item) => {
+          if (item.id === load.id) {
+            if (item.amount < item.max) {
+              item.amount += 1;
+              totalAmount++;
+              totalPrice += item.price;
+            }
+            return item;
+          } else {
+            return item;
+          }
+        });
+      } else if (load.value === "decrease") {
+        car.map((item) => {
+          if (item.id === load.id) {
+            if (item.amount > 1) {
+              item.amount -= 1;
+              totalAmount--;
+              totalPrice -= item.price;
+            }
+            return item;
+          } else {
+            return item;
+          }
+        });
+      }
+
+      return {
+        ...state,
+        cart: car,
+        total_products_price: totalPrice,
+        total_amount: totalAmount,
+      };
 
     default:
       throw new Error(`No Matching "${action.type}" - action type`);

@@ -13,17 +13,16 @@ const CartTotals = () => {
       <div>
         <article>
           <h5>
-            <h5>Subtotal :</h5>
-            <h5>{formatPrice(total_products_price)}</h5>
+            <div>Subtotal :</div>
+            <div>{formatPrice(total_products_price)}</div>
           </h5>
           <p>
-            <p>Shipping Fee : </p>
-            <p>{formatPrice(shipping)}</p>
+            Shipping Fee :<div>{formatPrice(shipping)}</div>
           </p>
           <hr />
           <h4>
-            <h4>Order Total :</h4>{" "}
-            <h4>{formatPrice(total_products_price + shipping)}</h4>
+            <div>Order Total :</div>
+            <div>{formatPrice(total_products_price + shipping)}</div>
           </h4>
         </article>
         <button className="btn">login</button>
@@ -47,6 +46,7 @@ const Wrapper = styled.section`
     display: grid;
     grid-template-columns: 200px 1fr;
   }
+
   p {
     text-transform: capitalize;
   }

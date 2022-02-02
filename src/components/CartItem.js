@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import AmountButtons from "./AmountButtons";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 const CartItem = ({ id, name, color, amount, image, price, max }) => {
-  const { decrease, increase, removeCartItem } = useCartContext();
+  const { toggleAmount, removeCartItem, storeToLocal } = useCartContext();
 
-  const fun = {
-    decrease,
-    increase,
-    val: amount,
+  const increase = () => {
+    toggleAmount(id, "increase");
   };
+  const decrease = () => {
+    toggleAmount(id, "decrease");
+  };
+
+  useEffect(() => {
+    storeToLocal();
+  }, [amount]);
 
   return (
     <Wrapper>
@@ -27,7 +32,12 @@ const CartItem = ({ id, name, color, amount, image, price, max }) => {
 
       <div className="price">{formatPrice(price)}</div>
 
-      <AmountButtons {...fun} />
+      <AmountButtons
+        className="amount-btns"
+        decrease={decrease}
+        increase={increase}
+        val={amount}
+      />
 
       <div className="subtotal">{formatPrice(price * amount)}</div>
       <div className="remove-btn">
