@@ -29,7 +29,7 @@ const CartItem = ({ id, name, color, amount, image, price, max }) => {
 
       <AmountButtons {...fun} />
 
-      <div className="subtotal">$25684</div>
+      <div className="subtotal">{formatPrice(price * amount)}</div>
       <div className="remove-btn">
         <FaTrash onClick={() => removeCartItem(id)} />
       </div>

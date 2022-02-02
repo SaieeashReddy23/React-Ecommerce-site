@@ -12,13 +12,14 @@ const Footer = () => {
 };
 
 const Wrapper = styled.footer`
-  height: 6rem;
+  height: 6.1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--clr-black);
   text-align: center;
+  margin-top: 2rem;
   span {
     color: var(--clr-primary-5);
   }

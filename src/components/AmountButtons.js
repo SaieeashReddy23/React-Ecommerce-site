@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
-const AmountButtons = ({ increse, decrease, val }) => {
+const AmountButtons = ({ increase, decrease, val }) => {
   return (
     <Wrapper>
-      <FaMinus onClick={decrease} />
+      <button onClick={decrease}>
+        <FaMinus />
+      </button>
+
       <h2>{val}</h2>
-      <FaPlus onClick={increse} />
+      <button onClick={increase}>
+        <FaPlus />
+      </button>
     </Wrapper>
   );
 };
@@ -18,6 +23,8 @@ const Wrapper = styled.div`
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
   h2 {
     margin-bottom: 0;
   }

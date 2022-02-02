@@ -35,9 +35,9 @@ const Nav = () => {
           </li>
         </ul>
 
-        <div className="cart-btn-wrapper">
+        <Link className="cart-btn-wrapper" to="/cart">
           <CartButtons />
-        </div>
+        </Link>
       </div>
     </NavContainer>
   );

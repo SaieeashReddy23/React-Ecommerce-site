@@ -12,22 +12,26 @@ const CartContent = () => {
   return (
     <Wrapper className="section-center">
       <CartColumns />
-      {cart.map((item, index) => {
-        return <CartItem key={index} {...item} />;
-      })}
-      <CartItem />
-      <CartTotals />
+      {cart !== [] &&
+        cart.map((item, index) => {
+          return <CartItem key={index} {...item} />;
+        })}
+
       <div className="link-container">
-        <button className="link-btn"> Continue Shopping</button>
+        <Link to="/products">
+          <button className="link-btn"> Continue Shopping</button>
+        </Link>
+
         <button className="clear-btn link-btn" onClick={clearCart}>
           Clear Shopping Cart
         </button>
       </div>
+
+      <CartTotals />
     </Wrapper>
   );
 };
 const Wrapper = styled.section`
-  min-height: 66vh;
   .link-container {
     display: flex;
     justify-content: space-between;
