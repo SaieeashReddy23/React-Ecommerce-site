@@ -143,7 +143,6 @@ const Filters = () => {
 };
 
 const Wrapper = styled.section`
-  width:100vw;
 
   .form-control {
     margin-bottom: 1.25rem;
