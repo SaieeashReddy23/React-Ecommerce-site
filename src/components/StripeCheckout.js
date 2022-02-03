@@ -16,14 +16,14 @@ import { useHistory, Link } from "react-router-dom";
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = () => {
-  const { cart, total_amount, shipping } = useCartContext();
+  const { cart, total_products_price, shipping, clearCart } = useCartContext();
   const { myUser } = useUserContext();
   const history = useHistory();
 
   //Stripe Stuff
 
-  const [success, setSuccess] = useState(true);
-  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -51,7 +51,15 @@ const CheckoutForm = () => {
   };
 
   const createPaymentIntent = async () => {
-    console.log("Hello from stripe checkout");
+    try {
+      const { data } = await axios.post(
+        "/.netlify/functions/create-payment-intent",
+        JSON.stringify({ cart, shipping, total_products_price })
+      );
+      setClientSecret(data.client_secret);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   useEffect(() => {
@@ -59,9 +67,36 @@ const CheckoutForm = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleChange = async (event) => {};
+  const handleChange = async (event) => {
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : "");
+  };
 
-  const handleSubmit = async (ev) => {};
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+
+    setProcessing(true);
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    });
+
+    if (payload.error) {
+      setError(`payment failed ${payload.error.message}`);
+      setProcessing(false);
+    } else {
+      setError(null);
+      setProcessing(false);
+      setSuccess(true);
+      clearCart();
+
+      setTimeout(() => {
+        history.push("/");
+      }, 10000);
+    }
+  };
 
   if (cart.length < 1) {
     return (
@@ -79,6 +114,19 @@ const CheckoutForm = () => {
 
   return (
     <div>
+      {success ? (
+        <article>
+          <h4>Thank you</h4>
+          <h4>Your payment was successful!</h4>
+          <h4>Redirecting to home page short</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Hello , {myUser && myUser.name}</h4>
+          <p>your total is : {formatPrice(shipping + total_products_price)}</p>
+          <p>Test Card number : 4242 4242 4242 4242</p>
+        </article>
+      )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
@@ -100,7 +148,7 @@ const CheckoutForm = () => {
           Payment succeded , see the result in Your{" "}
           <a href={`https://dashboard.stripe.com/test/payments`}>
             Stripe dashboard
-          </a>{" "}
+          </a>
           Refresh the page to pay again
         </p>
       </form>
