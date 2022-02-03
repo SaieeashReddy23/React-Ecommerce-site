@@ -22,7 +22,7 @@ const CheckoutForm = () => {
 
   //Stripe Stuff
 
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(true);
   const [error, setError] = useState(false);
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
@@ -50,6 +50,19 @@ const CheckoutForm = () => {
     },
   };
 
+  const createPaymentIntent = async () => {
+    console.log("Hello from stripe checkout");
+  };
+
+  useEffect(() => {
+    createPaymentIntent();
+    // eslint-disable-next-line
+  }, []);
+
+  const handleChange = async (event) => {};
+
+  const handleSubmit = async (ev) => {};
+
   if (cart.length < 1) {
     return (
       <div className="empty">
@@ -65,9 +78,33 @@ const CheckoutForm = () => {
   }
 
   return (
-    <h4 className="section-center" style={{ marginTop: "2rem" }}>
-      hello from Stripe Checkout{" "}
-    </h4>
+    <div>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <CardElement
+          id="card-element"
+          options={cardStyle}
+          onChange={handleChange}
+        />
+        <button disabled={processing || disabled || success} id="submit">
+          <span id="button-text">
+            {processing ? <div className="spinner" id="spinner"></div> : "pay"}
+          </span>
+        </button>
+
+        {error && (
+          <div className="card-error" role="alert">
+            {error}
+          </div>
+        )}
+        <p className={success ? "result-message" : "result-message hidden"}>
+          Payment succeded , see the result in Your{" "}
+          <a href={`https://dashboard.stripe.com/test/payments`}>
+            Stripe dashboard
+          </a>{" "}
+          Refresh the page to pay again
+        </p>
+      </form>
+    </div>
   );
 };
 
@@ -82,6 +119,11 @@ const StripeCheckout = () => {
 };
 
 const Wrapper = styled.section`
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 60vh;
   form {
     width: 30vw;
     align-self: center;
