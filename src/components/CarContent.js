@@ -7,7 +7,22 @@ import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
 
 const CartContent = () => {
-  const { cart, clearCart } = useCartContext();
+  const { cart, clearCart,total_amount } = useCartContext();
+
+  if(total_amount < 1){
+    return <div className="empty">
+    <div>
+     <h1 style={{marginBottom:"1rem"}}>Your cart is empty</h1>
+    
+
+<Link to="/products">
+   <button className="btn">Fill up</button>
+</Link>
+    </div>
+   
+ 
+    </div>
+  }
 
   return (
     <Wrapper className="section-center">

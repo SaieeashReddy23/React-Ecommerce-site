@@ -13,7 +13,7 @@ const CartPage = () => {
 };
 
 const Wrapper = styled.main`
-  min-height: 80vh;
+  min-height: 75vh;
   .empty {
     text-align: center;
     h2 {
