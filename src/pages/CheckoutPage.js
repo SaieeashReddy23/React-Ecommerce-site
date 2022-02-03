@@ -11,6 +11,6 @@ const CheckoutPage = () => {
   );
 };
 const Wrapper = styled.div`
-  min-height: 75vh;
+  min-height: 78.7vh;
 `;
 export default CheckoutPage;
