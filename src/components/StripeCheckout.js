@@ -113,7 +113,7 @@ const CheckoutForm = () => {
   }
 
   return (
-    <div>
+    <div className="section-center">
       {success ? (
         <article>
           <h4>Thank you</h4>
