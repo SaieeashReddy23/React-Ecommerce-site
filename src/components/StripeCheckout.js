@@ -125,6 +125,7 @@ const CheckoutForm = () => {
           <h4>Hello , {myUser && myUser.name}</h4>
           <p>your total is : {formatPrice(shipping + total_products_price)}</p>
           <p>Test Card number : 4242 4242 4242 4242</p>
+          <p>Test MM/YY CVC ZIP : 33/33 333 33333</p>
         </article>
       )}
       <form id="payment-form" onSubmit={handleSubmit}>
@@ -145,7 +146,7 @@ const CheckoutForm = () => {
           </div>
         )}
         <p className={success ? "result-message" : "result-message hidden"}>
-          Payment succeded , see the result in Your{" "}
+          Payment succeded , see the result in Your
           <a
             href={`https://dashboard.stripe.com/test/payments`}
             target="_blank"
