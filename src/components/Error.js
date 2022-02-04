@@ -1,6 +1,16 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
 const Error = () => {
-  return <h4>error element</h4>
-}
+  return (
+    <Wrapper>
+      <h2>Some error occured while fetching products</h2>
+    </Wrapper>
+  );
+};
 
-export default Error
+const Wrapper = styled.section`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+`;
+export default Error;

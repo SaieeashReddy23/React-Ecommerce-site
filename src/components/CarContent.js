@@ -7,21 +7,20 @@ import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
 
 const CartContent = () => {
-  const { cart, clearCart,total_amount } = useCartContext();
+  const { cart, clearCart, total_amount } = useCartContext();
 
-  if(total_amount < 1){
-    return <div className="empty">
-    <div>
-     <h1 style={{marginBottom:"1rem"}}>Your cart is empty</h1>
-    
+  if (total_amount < 1) {
+    return (
+      <div className="empty">
+        <div>
+          <h1 style={{ marginBottom: "1rem" }}>Your cart is empty</h1>
 
-<Link to="/products">
-   <button className="btn">Fill up</button>
-</Link>
-    </div>
-   
- 
-    </div>
+          <Link to="/products">
+            <button className="btn">Fill up</button>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -34,10 +33,10 @@ const CartContent = () => {
 
       <div className="link-container">
         <Link to="/products">
-          <button className="link-btn"> Continue Shopping</button>
+          <button className="link-btn btn"> Continue Shopping</button>
         </Link>
 
-        <button className="clear-btn link-btn" onClick={clearCart}>
+        <button className="clear-btn link-btn btn" onClick={clearCart}>
           Clear Shopping Cart
         </button>
       </div>
@@ -47,6 +46,7 @@ const CartContent = () => {
   );
 };
 const Wrapper = styled.section`
+  margin-top: 4rem;
   .link-container {
     display: flex;
     justify-content: space-between;

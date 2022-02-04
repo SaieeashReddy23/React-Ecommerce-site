@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Filters, ProductList, Sort, PageHero } from "../components";
+import { Filters, ProductList, Sort, PageHero, Error } from "../components";
+import { useProductsContext } from "../context/products_context";
 
 const ProductsPage = () => {
+  const { loading, error } = useProductsContext();
   return (
     <Wrapper>
       <PageHero title="Products" />
@@ -11,7 +13,8 @@ const ProductsPage = () => {
 
         <div>
           <Sort />
-          <ProductList />
+          {error && <Error />}
+          {loading ? <div className="loading"></div> : <ProductList />}
         </div>
       </div>
     </Wrapper>

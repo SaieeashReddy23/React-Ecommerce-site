@@ -47,6 +47,7 @@ const Wrapper = styled.section`
   margin-top: 3rem;
   display: flex;
   justify-content: center;
+
   article {
     border: 1px solid var(--clr-grey-8);
     border-radius: var(--radius);
@@ -73,6 +74,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 776px) {
     justify-content: flex-end;
+    margin-bottom: 2rem;
   }
   .btn {
     width: 100%;
