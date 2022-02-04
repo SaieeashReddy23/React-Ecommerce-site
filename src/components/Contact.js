@@ -87,7 +87,7 @@ const Wrapper = styled.section`
       grid-template-columns: 1fr 1fr;
       align-items: center;
       gap: 5rem;
-      margin-top: -2rem;
+      margin-bottom: -4rem;
     }
     p {
       margin-bottom: 0;

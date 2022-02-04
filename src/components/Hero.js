@@ -27,7 +27,9 @@ const Hero = () => {
 };
 
 const Wrapper = styled.section`
-  min-height: 60vh;
+  min-height: 40vh;
+  margin-top: 2rem;
+  margin-bottom: -3rem;
   display: grid;
   place-items: center;
   .img-container {

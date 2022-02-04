@@ -73,7 +73,7 @@ const filter_reducer = (state, action) => {
 
     case FILTER_PRODUCTS:
       const { all_products } = state;
-      const { text, category, company, price, shipping } = state.filters;
+      const { text, category, company, price, shipping, color } = state.filters;
 
       let tempProducts = [...all_products];
 
@@ -95,21 +95,24 @@ const filter_reducer = (state, action) => {
         });
       }
 
+      if (color !== "all") {
+        tempProducts = tempProducts.filter(({ colors }) => {
+          let found = false;
+
+          colors.forEach((element) => {
+            if (element === color) {
+              found = true;
+            }
+          });
+          return found;
+        });
+      }
+
       if (shipping) {
         tempProducts = tempProducts.filter((product) => {
           return product.shipping === true;
         });
       }
-
-      // tempProducts = tempProducts.filter(({ colors }) => {
-      //   let found = false;
-      //   colors.map((c) => {
-      //     if (c === color) {
-      //       found = true;
-      //     }
-      //   });
-      //   return found;
-      // });
 
       tempProducts = tempProducts.filter((product) => {
         return product.price <= price;

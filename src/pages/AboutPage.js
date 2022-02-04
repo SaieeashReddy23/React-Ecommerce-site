@@ -63,7 +63,7 @@ const Wrapper = styled.section`
   }
   @media (min-width: 992px) {
     grid-template-columns: 1fr 2fr;
-    min-height: 61vh;
+    min-height: 64.7vh;
   }
 `;
 export default AboutPage;
