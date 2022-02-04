@@ -94,7 +94,7 @@ const CheckoutForm = () => {
       setTimeout(() => {
         clearCart();
         history.push("/");
-      }, 10000);
+      }, 5000);
     }
   };
 
