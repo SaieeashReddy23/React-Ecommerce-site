@@ -36,6 +36,7 @@ const FeaturedProducts = () => {
 
 const Wrapper = styled.section`
   background: var(--clr-grey-10);
+  margin-top: 2rem;
   padding: 2rem;
   text-align: center;
   .featured {
